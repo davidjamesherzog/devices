@@ -1,0 +1,21 @@
+{
+  "name": "devices",
+  "description": "Device Information",
+  "main": "index.js",
+  "authors": [
+    "Dave Herzog <davidjherzog@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "^1.0.5"
+  }
+}
