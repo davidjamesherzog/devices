@@ -1,2 +1,16 @@
-/node_modules/
-/bower_components/
+.tmp/
+bower_components/
+node_modules/
+.idea/
+
+build
+.tmp
+*.save
+src/**/*.map
+src/client/**/*.js
+!src/client/**/*.spec.js
+
+# Ignore Test reporters
+###################
+**/test/coverage
+report
