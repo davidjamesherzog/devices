@@ -5,7 +5,7 @@ namespace devices {
     list: () => ng.IPromise<Array<devices.IDevice>>;
     find: (id: string) => ng.IPromise<devices.IDevice>;
     create: (device: devices.IDevice) => ng.IPromise<devices.IDevice>;
-    purge: (device: devices.IDevice) => ng.IPromise<void>;
+    purge: (id: string) => ng.IPromise<void>;
   }
 
   export class DeviceService implements IDeviceService {
@@ -83,16 +83,16 @@ namespace devices {
 
     }
 
-    purge(device: devices.IDevice) {
+    purge(id: string) {
       let deferred = this.$q.defer();
 
       let success = (response: devices.IDevice) => {
         deferred.resolve(response);
       };
 
-      console.log('ID: ' + device._id);
-      let resource = this.$resource('/api/devices/:id/', {id: device._id});
-      resource.delete(device._id, success);
+      console.log('ID: ' + id);
+      let resource = this.$resource('/api/devices/:id/', {id: id});
+      resource.delete(id, success);
 
       return deferred.promise;
     }

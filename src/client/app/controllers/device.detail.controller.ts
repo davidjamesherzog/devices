@@ -8,20 +8,27 @@ namespace devices {
 
   export class DeviceDetailController implements IDeviceDetailsController {
 
-    static $inject: Array<string> = ['$stateParams', 'DeviceService'];
+    static $inject: Array<string> = ['$stateParams', 'toastr', 'DeviceService'];
     constructor(private $stateParams: ng.ui.IStateParamsService,
+                private toastr: Toastr,
                 private DeviceService: devices.IDeviceService) {
       this.find($stateParams['id']);
     }
 
-    //var _this = this;
     device: devices.IDevice = null;
 
     find(id: string) {
+
+      let success = (response) => {
+        this.device = response;
+      };
+
+      let error = (response) => {
+        toastr.error(response);
+      };
+
       this.DeviceService.find(id)
-        .then((response) => {
-          this.device = response;
-        });
+        .then(success);
     }
 
   }

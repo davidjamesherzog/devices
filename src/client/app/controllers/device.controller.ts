@@ -19,13 +19,12 @@ namespace devices {
     devices: Array<devices.IDevice> = [];
 
     list() {
-      let self = this;
 
-      let success = function(response) {
-        self.devices = response;
+      let success = (response) => {
+        this.devices = response;
       };
 
-      let error = function(response) {
+      let error = (response) => {
         toastr.error(response);
       };
 
@@ -36,15 +35,14 @@ namespace devices {
     }
 
     create(device: devices.IDevice) {
-      let self = this;
 
-      let success = function(response) {
+      let success = (response) => {
         console.log(response);
         toastr.success('Created Device - ' + device.ip + ' ' + device.description, 'Success');
-        self.list();
+        this.list();
       };
 
-      let error = function(response) {
+      let error = (response) => {
         toastr.error(response);
       };
 
@@ -55,19 +53,18 @@ namespace devices {
     }
 
     purge(device: devices.IDevice) {
-      let self = this;
 
-      let success = function(response) {
+      let success = (response) => {
         console.log(response);
         toastr.success('Device Deleted - ' + device.ip + ' ' + device.description, 'Success');
-        self.list();
+        this.list();
       };
 
-      let error = function(response) {
+      let error = (response) => {
         toastr.error(response);
       };
 
-      this.DeviceService.purge(device)
+      this.DeviceService.purge(device._id)
         .then(success)
         .catch(error);
     }
