@@ -28,7 +28,8 @@ namespace devices {
       };
 
       this.DeviceService.find(id)
-        .then(success);
+        .then(success)
+        .catch(error);
     }
 
   }
