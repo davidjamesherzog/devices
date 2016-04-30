@@ -31,11 +31,10 @@ var deviceController = function(Device) {
   }
 
   function patch(req, res) {
-    if(req.body._id)
+    if (req.body._id)
       delete req.body._id;
 
-    for(var p in req.body)
-    {
+    for (var p in req.body) {
       req.device[p] = req.body[p];
     }
 
@@ -50,7 +49,10 @@ var deviceController = function(Device) {
   }
 
   function post(req, res) {
-    var device = new Device(req.body);
+    req.device = {};
+    _mapRequest(req);
+
+    var device = new Device(req.device);
 
     //if (!req.body.title) {
     //  res.status(400);
@@ -64,10 +66,7 @@ var deviceController = function(Device) {
   }
 
   function put(req, res) {
-    req.device.ip = req.body.ip;
-    req.device.name = req.body.name;
-    req.device.description = req.body.description;
-    req.device.mac = req.body.mac;
+    _mapRequest(req);
 
     req.device.save(function(err) {
       if(err)
@@ -99,6 +98,16 @@ var deviceController = function(Device) {
         res.status(404).send('no device found');
       }
     });
+  }
+
+  function _mapRequest(req) {
+    req.device.name = req.body.name;
+    req.device.description = req.body.description;
+    req.device.ip = req.body.ip;
+    req.device.dhcp = req.body.dhcp;
+    req.device.mac = req.body.mac;
+    req.device.type = req.body.type;
+    req.device.os = req.body.os;
   }
 
 };
