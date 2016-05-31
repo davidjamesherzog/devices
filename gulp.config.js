@@ -96,7 +96,7 @@ module.exports = function () {
     templateCache: {
       file: 'templates.js',
       options: {
-        module: 'contactsApp',
+        module: 'devices',
         root: 'app/',
         standAlone: false
       }
