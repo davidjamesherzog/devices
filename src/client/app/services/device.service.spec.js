@@ -1,4 +1,16 @@
 /* jshint -W117, -W030 */
+describe('Device Service', function() {
+
+  beforeEach(function () {
+    bard.appModule('devices');
+    bard.inject('$httpBackend', 'DeviceService');
+  });
+
+  it('true = true', function() {
+    expect(true).toEqual(true);
+  });
+
+});
 /*xdescribe('Contacts Service', function () {
   'use strict';
 
