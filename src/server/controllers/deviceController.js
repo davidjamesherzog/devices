@@ -58,9 +58,20 @@ var deviceController = function(Device) {
     //  res.status(400);
     //  res.send('Title is required');
     //} else {
-    device.save();
-    res.status(201);
-    res.send(device);
+    var callback = function(errors) {
+
+      if (errors) {
+        //var error = new Error({code: 1001, message: '"OS" is invalid'});
+        //res.status(400).send({code: 1001, message: '"OS" is invalid'});
+        res.status(400).send(_constructErrors(errors));
+      } else {
+        res.status(201);
+        res.send(device);
+      }
+    };
+
+    device.save(callback);
+
     //}
 
   }
@@ -108,6 +119,24 @@ var deviceController = function(Device) {
     req.device.mac = req.body.mac;
     req.device.type = req.body.type;
     req.device.os = req.body.os;
+  }
+
+  function _constructErrors(err) {
+
+    var errors = [];
+
+    Object.keys(err.errors).forEach(function (field) {
+      var eObj = err.errors[field];
+
+      var error = {
+        code: eObj.message,
+        message: ''
+      };
+
+      errors.push(error);
+    });
+
+    return errors;
   }
 
 };

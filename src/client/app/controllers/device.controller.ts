@@ -3,6 +3,7 @@ namespace devices {
 
   interface IDeviceController {
     devices: Array<any>;
+    toggleSideNav: () => void,
     list: () => void,
     create: (device: devices.IDevice) => void,
     purge: (device: devices.IDevice) => void
@@ -10,13 +11,18 @@ namespace devices {
 
   export class DeviceController implements IDeviceController {
 
-    static $inject: Array<string> = ['toastr', 'DeviceService'];
+    static $inject: Array<string> = ['toastr', 'DeviceService', '$mdSidenav'];
     constructor(private toastr: Toastr,
-                private DeviceService: devices.IDeviceService) {
+                private DeviceService: devices.IDeviceService,
+                private $mdSidenav: angular.material.ISidenavService) {
       this.list();
     }
 
     devices: Array<devices.IDevice> = [];
+
+    toggleSideNav() : void {
+      this.$mdSidenav('left').toggle();
+    }
 
     list() {
 

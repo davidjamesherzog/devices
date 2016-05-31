@@ -5,8 +5,9 @@ namespace devices {
     .module('devices')
     .config(config);
 
-  config.$inject = ['$stateProvider', '$urlRouterProvider'];
-  function config($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
+  config.$inject = ['$stateProvider', '$urlRouterProvider', '$mdIconProvider', '$mdThemingProvider'];
+  function config($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider,
+                  $mdIconProvider: angular.material.IIconProvider, $mdThemingProvider: angular.material.IThemingProvider) {
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
@@ -23,6 +24,13 @@ namespace devices {
         controller: 'DeviceDetailController',
         controllerAs: 'vm'
       });
+
+    $mdIconProvider
+      .icon('menu', './svg/menu.svg', 24);
+
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blue')
+      .accentPalette('red');
   }
 
 }
