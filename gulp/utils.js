@@ -285,7 +285,7 @@ module.exports = function () {
       gulp.watch([config.allsass], ['build:styles'])
         .on('change', changeEvent);
     } else {
-      gulp.watch([config.sass, config.js, config.html], ['build:optimize', browserSync.reload])
+      gulp.watch([config.allsass, config.js, config.html], ['build:optimize', browserSync.reload])
         .on('change', changeEvent);
     }
 
