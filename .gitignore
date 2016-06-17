@@ -3,7 +3,8 @@ bower_components/
 node_modules/
 .idea/
 
-build
+/base
+/build
 .tmp
 *.save
 src/**/*.map

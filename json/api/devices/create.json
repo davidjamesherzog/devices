@@ -1,0 +1,10 @@
+{
+  "_id": "570657ddea394e037033b588",
+  "ip": "10.15.1.100",
+  "name": "Pluto",
+  "description": "Linux VM",
+  "mac": "EA:EA:EA:EA:EA",
+  "dhcp": false,
+  "os": "Linux",
+  "type": "server"
+}

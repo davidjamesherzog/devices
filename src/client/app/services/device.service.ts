@@ -5,7 +5,7 @@ namespace devices {
     list: () => ng.IPromise<Array<devices.IDevice>>;
     find: (id: string) => ng.IPromise<devices.IDevice>;
     create: (device: devices.IDevice) => ng.IPromise<devices.IDevice>;
-    purge: (id: string) => ng.IPromise<void>;
+    purge: (id: string) => ng.IPromise<{}>;
   }
 
   export class DeviceService implements IDeviceService {
@@ -29,7 +29,10 @@ namespace devices {
             ip: element.ip,
             name: element.name,
             description: element.description,
-            mac: element.mac
+            mac: element.mac,
+            dhcp: element.dhcp,
+            os: element.os,
+            type: element.type
           };
           devices.push(device);
         });
@@ -55,7 +58,10 @@ namespace devices {
           ip: response.ip,
           name: response.name,
           description: response.description,
-          mac: response.mac
+          mac: response.mac,
+          dhcp: response.dhcp,
+          os: response.os,
+          type: response.type
         };
         console.log(device);
         deferred.resolve(device);
@@ -90,7 +96,6 @@ namespace devices {
         deferred.resolve(response);
       };
 
-      console.log('ID: ' + id);
       let resource = this.$resource('/api/devices/:id/', {id: id});
       resource.delete(id, success);
 

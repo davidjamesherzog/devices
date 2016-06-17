@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "570657ddea394e037033b588",
+    "ip": "10.15.1.100",
+    "name": "Pluto",
+    "description": "Linux VM",
+    "mac": "EA:EA:EA:EA:EA",
+    "dhcp": false,
+    "os": "Linux",
+    "type": "server"
+  },
+  {
+    "_id": "57176705fab3eae4130273a0",
+    "ip": "10.15.1.103",
+    "name": "Sun",
+    "description": "Linux VM",
+    "mac": "EA:EA:EA:EA:EA",
+    "dhcp": false,
+    "os": "Linux",
+    "type": "server"
+  },
+  {
+    "_id": "57183011380c3b032baaddbb",
+    "ip": "",
+    "name": "Samsung",
+    "description": "Android",
+    "mac": "EA:EA:EA:EA:E1",
+    "dhcp": true,
+    "os": "Android",
+    "type": "mobile"
+  },
+  {
+    "_id": "5724efd01c5946f118981945",
+    "name": "Pluto2",
+    "description": "Linux VM",
+    "ip": "10.15.1.110",
+    "dhcp": false,
+    "mac": "AE:AE:AE:AE:AE",
+    "os": "Linux",
+    "type": "server"
+  },
+  {
+    "_id": "5725e14f07edb1cb1b45f272",
+    "name": "Pluto3",
+    "description": "Linux VM",
+    "ip": "10.15.1.120",
+    "dhcp": false,
+    "mac": "AE:AE:AE:AE:AE",
+    "os": "Linux",
+    "type": "server"
+  }
+]
