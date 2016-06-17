@@ -61,6 +61,8 @@ module.exports = function () {
       '**/*.module.js',
       '**/*.js'
     ],
+    jsonBase: './base/json',
+    jsonHome: './json/**/*.json',
     report: report,
     root: root,
     sass: client + 'styles/styles.scss',
@@ -96,7 +98,7 @@ module.exports = function () {
     templateCache: {
       file: 'templates.js',
       options: {
-        module: 'contactsApp',
+        module: 'devices',
         root: 'app/',
         standAlone: false
       }

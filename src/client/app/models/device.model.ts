@@ -6,6 +6,9 @@ namespace devices {
     ip: string,
     name: string,
     description: string,
-    mac: string
+    mac: string,
+    dhcp: boolean,
+    os: string,
+    type: string
   }
 }

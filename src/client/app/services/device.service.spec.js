@@ -1,35 +1,23 @@
 /* jshint -W117, -W030 */
 describe('Device Service', function() {
 
-  beforeEach(function () {
-    bard.appModule('devices');
-    bard.inject('$httpBackend', 'DeviceService');
-  });
-
-  it('true = true', function() {
-    expect(true).toEqual(true);
-  });
-
-});
-/*xdescribe('Contacts Service', function () {
-  'use strict';
-
   var responseObject;
   var functionObject;
-  var spySuccess;
-  var spyFailure;
-  var id = '56d765240b76fee631c409ef';
+  var id = '570657ddea394e037033b588';
 
   var api = {
-    contacts: {
+    devices: {
       list: {
-        success: readJSON('json/api/contacts/list.json')
+        success: readJSON('json/api/devices/list.json')
       },
       find: {
-        success: readJSON('json/api/contacts/find.json')
+        success: readJSON('json/api/devices/find.json')
       },
       create: {
-        success: readJSON('json/api/contacts/create.json')
+        success: readJSON('json/api/devices/create.json')
+      },
+      purge: {
+        success: readJSON('json/api/devices/create.json')
       }
     },
     error: {
@@ -38,11 +26,8 @@ describe('Device Service', function() {
   };
 
   beforeEach(function () {
-    bard.appModule('contactsApp');
-    bard.inject('$httpBackend', 'ContactsService');
-    localStorage.clear();
-    localStorage['Dave'] = '555-555-5555';
-    localStorage['Bob'] = '555-555-5555';
+    bard.appModule('devices');
+    bard.inject('$httpBackend', 'DeviceService');
 
     responseObject = {};
     functionObject = {
@@ -53,79 +38,109 @@ describe('Device Service', function() {
         responseObject = response;
       }
     };
-    spySuccess = sinon.spy(functionObject, 'success');
-    spyFailure = sinon.spy(functionObject, 'failure');
-
+    spyOn(functionObject, 'success').and.callThrough();
+    spyOn(functionObject, 'failure').and.callThrough();
   });
 
   it('exists', function () {
-    expect(ContactsService).to.exist;
+    expect(DeviceService).toBeDefined();
   });
 
   describe('list', function() {
 
     it('returns a value', function () {
-      $httpBackend.whenGET('/api/contacts').respond(200, api.contacts.list.success);
+      $httpBackend.whenGET('/api/devices').respond(200, api.devices.list.success);
 
-      ContactsService.list()
+      DeviceService.list()
         .then(functionObject.success, functionObject.failure);
 
       $httpBackend.flush();
 
-      expect(spySuccess).to.have.been.called;
-      expect(spyFailure).not.to.have.been.called;
+      expect(functionObject.success).toHaveBeenCalled();
+      expect(functionObject.failure).not.toHaveBeenCalled();
 
-      expect(responseObject).to.have.length(5);
-      expect(responseObject[0]._id).to.be.equal(id);
-      expect(responseObject[0].firstName).to.be.equal('Jim');
-      expect(responseObject[0].lastName).to.be.equal('Smith');
-      expect(responseObject[0].phone).to.be.equal('555-555-5555');
+      expect(responseObject.length).toEqual(5);
+      expect(responseObject[0]._id).toEqual(id);
+      expect(responseObject[0].ip).toEqual('10.15.1.100');
+      expect(responseObject[0].name).toEqual('Pluto');
+      expect(responseObject[0].description).toEqual('Linux VM');
+      expect(responseObject[0].mac).toEqual('EA:EA:EA:EA:EA');
+      expect(responseObject[0].dhcp).toEqual(false);
+      expect(responseObject[0].os).toEqual('Linux');
+      expect(responseObject[0].type).toEqual('server');
     });
 
   });
 
-
   describe('find', function() {
 
     it('returns a value', function () {
-      $httpBackend.whenGET('/api/contacts/56d765240b76fee631c409ef').respond(200, api.contacts.find.success);
+      $httpBackend.whenGET('/api/devices/570657ddea394e037033b588').respond(200, api.devices.find.success);
 
-      ContactsService.find(id)
+      DeviceService.find(id)
         .then(functionObject.success, functionObject.failure);
 
       $httpBackend.flush();
 
-      expect(spySuccess).to.have.been.called;
-      expect(spyFailure).not.to.have.been.called;
+      expect(functionObject.success).toHaveBeenCalled();
+      expect(functionObject.failure).not.toHaveBeenCalled();
 
-      expect(responseObject._id).to.be.equal(id);
-      expect(responseObject.firstName).to.be.equal('Jim');
-      expect(responseObject.lastName).to.be.equal('Smith');
-      expect(responseObject.phone).to.be.equal('555-555-5555');
+      expect(responseObject._id).toEqual(id);
+      expect(responseObject.ip).toEqual('10.15.1.100');
+      expect(responseObject.name).toEqual('Pluto');
+      expect(responseObject.description).toEqual('Linux VM');
+      expect(responseObject.mac).toEqual('EA:EA:EA:EA:EA');
+      expect(responseObject.dhcp).toEqual(false);
+      expect(responseObject.os).toEqual('Linux');
+      expect(responseObject.type).toEqual('server');
     });
 
   });
 
   describe('create', function() {
 
-    it('adds a contact', function () {
-      $httpBackend.whenPOST('/api/contacts').respond(200, api.contacts.create.success);
+    it('adds a device', function () {
+      $httpBackend.whenPOST('/api/devices').respond(200, api.devices.create.success);
 
-      var contact = {firstName: 'Jim', lastName: 'Smith', phone: '555-555-5555'};
-      ContactsService.create(contact)
+      var device = angular.copy(api.devices.create.success);
+      delete device._id;
+      DeviceService.create(device)
         .then(functionObject.success, functionObject.failure);
 
       $httpBackend.flush();
 
-      expect(spySuccess).to.have.been.called;
-      expect(spyFailure).not.to.have.been.called;
+      expect(functionObject.success).toHaveBeenCalled();
+      expect(functionObject.failure).not.toHaveBeenCalled();
 
-      expect(responseObject._id).to.be.equal(id);
-      expect(responseObject.firstName).to.be.equal('Jim');
-      expect(responseObject.lastName).to.be.equal('Smith');
-      expect(responseObject.phone).to.be.equal('555-555-5555');
+      expect(responseObject._id).toEqual(id);
+      expect(responseObject.ip).toEqual('10.15.1.100');
+      expect(responseObject.name).toEqual('Pluto');
+      expect(responseObject.description).toEqual('Linux VM');
+      expect(responseObject.mac).toEqual('EA:EA:EA:EA:EA');
+      expect(responseObject.dhcp).toEqual(false);
+      expect(responseObject.os).toEqual('Linux');
+      expect(responseObject.type).toEqual('server');
     });
 
   });
 
-});*/
+  describe('purge', function() {
+
+    it('a device', function () {
+      $httpBackend.whenDELETE('/api/devices/5725e14f07edb1cb1b45f272').respond(204);
+
+      DeviceService.purge('5725e14f07edb1cb1b45f272')
+        .then(functionObject.success, functionObject.failure);
+
+      $httpBackend.flush();
+
+      expect(functionObject.success).toHaveBeenCalled();
+      expect(functionObject.failure).not.toHaveBeenCalled();
+
+      expect(responseObject).toBeDefined();
+
+    });
+
+  });
+
+});

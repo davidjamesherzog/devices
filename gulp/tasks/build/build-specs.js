@@ -6,7 +6,7 @@ module.exports = function (gulp, config, plugins) {
    * @return {Stream}
    */
   return {
-    deps: ['build:templatecache'],
+    deps: ['build:templatecache', 'build:json'],
     fn: function () {
       plugins.utils.log('building the spec runner');
 
