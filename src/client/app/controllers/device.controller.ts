@@ -55,7 +55,6 @@ namespace devices {
     purge(device: devices.IDevice) {
 
       let success = (response) => {
-        console.log(response);
         toastr.success('Device Deleted - ' + device.ip + ' ' + device.description, 'Success');
         this.list();
       };

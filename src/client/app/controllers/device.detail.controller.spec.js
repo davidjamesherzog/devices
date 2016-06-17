@@ -1,17 +1,14 @@
 /* jshint -W117, -W030 */
-/*
-xdescribe('Contacts Detail Controller', function () {
+describe('Device Detail Controller', function () {
   var controller;
-  var spy;
-  var responseObject;
-  var functionObject;
-  var spySuccess;
-  var spyFailure;
 
   var api = {
-    contacts: {
+    devices: {
+      list: {
+        success: readJSON('json/api/devices/list.json')
+      },
       find: {
-        success: readJSON('json/api/contacts/find.json')
+        success: readJSON('json/api/devices/find.json')
       }
     },
     error: {
@@ -21,61 +18,87 @@ xdescribe('Contacts Detail Controller', function () {
 
   beforeEach(function () {
     bard.appModule('devices');
-    bard.inject('$controller', '$q', '$rootScope', '$stateParams', 'ContactsService');
-
-    controller = $controller('ContactsDetailController');
-    /!*controller = $controller('ContactsDetailController', {
-      $stateParams: $stateParams,
-      ContactsService: ContactsService
-    });*!/
-
-    responseObject = {};
-    functionObject = {
-      success: function(response) {
-        responseObject = response;
-      },
-      failure: function(response) {
-        responseObject = response;
-      }
-    };
-    spySuccess = sinon.spy(functionObject, 'success');
-    spyFailure = sinon.spy(functionObject, 'failure');
-  });
-
-  it('should exist', function () {
-    expect(controller).to.exist;
+    bard.inject('$controller', '$q', '$rootScope', '$stateParams', 'toastr', 'DeviceService');
   });
 
   describe('find', function () {
 
-    var id = '56d765240b76fee631c409ef';
+    var id = '570657ddea394e037033b588';
 
-    beforeEach(function () {
-      $stateParams.id = id;
+    describe('success', function() {
 
-      spy = sinon.stub(ContactsService, 'find');
-      spy.withArgs(id).returns($q.resolve(api.contacts.find.success));
+      beforeEach(function () {
+
+        spyOn(DeviceService, 'find').and.returnValue($q.resolve(api.devices.find.success));
+        $stateParams.id = id;
+
+        controller = $controller('DeviceDetailController', {
+          $stateParams: $stateParams,
+          DeviceService: DeviceService
+        });
+
+      });
+
+      it('controller should exist', function () {
+        expect(controller).toBeDefined;
+      });
+
+      it('should return device', function () {
+
+        controller.find($stateParams.id);
+
+        $rootScope.$apply();
+
+        expect(controller.device).toBeDefined();
+        expect(controller.device._id).toEqual(id);
+        expect(controller.device.ip).toEqual(api.devices.find.success.ip);
+        expect(controller.device.name).toEqual(api.devices.find.success.name);
+        expect(controller.device.description).toEqual(api.devices.find.success.description);
+        expect(controller.device.mac).toEqual(api.devices.find.success.mac);
+        expect(controller.device.dhcp).toEqual(api.devices.find.success.dhcp);
+        expect(controller.device.os).toEqual(api.devices.find.success.os);
+        expect(controller.device.type).toEqual(api.devices.find.success.type);
+      });
+
     });
 
-    it('should return contact', function () {
+    describe('failure', function() {
 
-      console.log(controller);
-      controller.find()
-        .then(functionObject.success, functionObject.failure);
+      var error = {
+        error: 'Find Failed!'
+      };
 
-      $rootScope.$apply();
+      beforeEach(function () {
 
-      expect(spySuccess).to.have.been.called;
-      expect(spyFailure).not.to.have.been.called;
+        spyOn(DeviceService, 'find').and.returnValue($q.reject(error));
+        $stateParams.id = id;
 
-      /!*expect(controller.contact).to.exist;
-      expect(controller.contact.id).to.be.equal(id);
-      expect(controller.contact.firstName).to.be.equal('Jim');
-      expect(controller.contact.lastName).to.be.equal('Smith');
-      expect(controller.contact.phone).to.be.equal('555-555-5555');*!/
+        controller = $controller('DeviceDetailController', {
+          $stateParams: $stateParams,
+          DeviceService: DeviceService
+        });
+
+      });
+
+      it('controller should exist', function () {
+        expect(controller).toBeDefined;
+      });
+
+      it('should fail returning device', function () {
+
+        spyOn(toastr, 'error');
+
+        controller.find($stateParams.id);
+
+        $rootScope.$digest();
+
+        expect(toastr.error).toHaveBeenCalledWith(error);
+      });
+
+
     });
+
 
   });
 
 });
-*/

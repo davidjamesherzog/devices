@@ -61,6 +61,8 @@ module.exports = function () {
       '**/*.module.js',
       '**/*.js'
     ],
+    jsonBase: './base/json',
+    jsonHome: './json/**/*.json',
     report: report,
     root: root,
     sass: client + 'styles/styles.scss',
