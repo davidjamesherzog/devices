@@ -5,7 +5,7 @@ namespace devices {
     list: () => ng.IPromise<Array<devices.IDevice>>;
     find: (id: string) => ng.IPromise<devices.IDevice>;
     create: (device: devices.IDevice) => ng.IPromise<devices.IDevice>;
-    purge: (id: string) => ng.IPromise<void>;
+    purge: (id: string) => ng.IPromise<{}>;
   }
 
   export class DeviceService implements IDeviceService {
