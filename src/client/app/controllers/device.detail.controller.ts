@@ -1,11 +1,6 @@
 namespace devices {
   'use strict';
 
-  interface IDeviceDetailsController {
-    device: devices.IDevice;
-    find: (id: string) => void
-  }
-
   export class DeviceDetailController implements IDeviceDetailsController {
 
     static $inject: Array<string> = ['$stateParams', 'toastr', 'DeviceService'];
