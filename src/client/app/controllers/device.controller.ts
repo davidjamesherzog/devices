@@ -1,13 +1,6 @@
 namespace devices {
   'use strict';
 
-  interface IDeviceController {
-    devices: Array<any>;
-    list: () => void,
-    create: (device: devices.IDevice) => void,
-    purge: (device: devices.IDevice) => void
-  }
-
   export class DeviceController implements IDeviceController {
 
     static $inject: Array<string> = ['toastr', 'DeviceService'];

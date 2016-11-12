@@ -15,3 +15,7 @@ src/client/**/*.js
 ###################
 **/test/coverage
 report
+
+# IDEs
+*.iml
+.vscode

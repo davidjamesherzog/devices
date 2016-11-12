@@ -350,12 +350,14 @@ module.exports = function () {
 
   function runTSC(directory, done) {
 
-    return gulp.src(directory + '/**/*.ts')
+    var tsProject = ts.createProject('tsconfig.json');
+
+    /*var tsResult = tsProject.src(directory + '/!**!/!*.ts') // instead of gulp.src(...)
+      .pipe(ts(tsProject));*/
+
+    return tsProject.src(directory + '/**/*.ts')
       .pipe($.sourcemaps.init())
-      .pipe(ts({
-        noImplicitAny: false,
-        target: 'ES5'
-      }))
+      .pipe(ts(tsProject))
 
       //write comments to tell istanbul to ignore the code inside the iife parameters
       .js.pipe($.replace(/(}\)\()(.*\|\|.*;)/g, '$1/* istanbul ignore next */$2'))
