@@ -4,9 +4,7 @@
     "module": "commonjs",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "declarationFiles": true,
-    "noExternalResolve": false
+    "experimentalDecorators": true
   },
   "filesGlob": [
     "**/*.ts",

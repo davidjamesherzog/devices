@@ -352,9 +352,6 @@ module.exports = function () {
 
     var tsProject = ts.createProject('tsconfig.json');
 
-    /*var tsResult = tsProject.src(directory + '/!**!/!*.ts') // instead of gulp.src(...)
-      .pipe(ts(tsProject));*/
-
     return tsProject.src(directory + '/**/*.ts')
       .pipe($.sourcemaps.init())
       .pipe(ts(tsProject))
