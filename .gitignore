@@ -7,9 +7,12 @@ node_modules/
 /build
 .tmp
 *.save
+
+src/client/specs.html
 src/**/*.map
 src/client/**/*.js
 !src/client/**/*.spec.js
+
 
 # Ignore Test reporters
 ###################

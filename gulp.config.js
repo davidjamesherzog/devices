@@ -5,6 +5,7 @@ module.exports = function () {
   var report = './report/';
   var root = './';
   var specRunnerFile = 'specs.html';
+  var specRunnerStubFile = 'specs-stub.html';
   var temp = './.tmp/';
   var wiredep = require('wiredep');
   var bowerFiles = wiredep({devDependencies: true})['js'];
@@ -117,6 +118,7 @@ module.exports = function () {
      * specs.html, our HTML spec runner
      */
     specRunner: client + specRunnerFile,
+    specRunnerStub: client + specRunnerStubFile,
     specRunnerFile: specRunnerFile,
 
     /**

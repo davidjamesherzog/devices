@@ -21,13 +21,14 @@ module.exports = function (gulp, config, plugins) {
       options.devDependencies = true;
 
       return gulp
-        .src(config.specRunner)
+        .src(config.specRunnerStub)
         .pipe(wiredep(options))
         .pipe(plugins.utils.inject(config.js, '', config.jsOrder))
         .pipe(plugins.utils.inject(config.testlibraries, 'testlibraries'))
         .pipe(plugins.utils.inject(config.specHelpers, 'spechelpers'))
         .pipe(plugins.utils.inject(specs, 'specs', ['**/*']))
         .pipe(plugins.utils.inject(templateCache, 'templates'))
+        .pipe(plugins.rename(config.specRunnerFile))
         .pipe(gulp.dest(config.client));
     }
   };
