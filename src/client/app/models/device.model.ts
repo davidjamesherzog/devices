@@ -1,4 +1,4 @@
-namespace devices {
+module devices {
   'use strict';
 
   export interface IDevice {

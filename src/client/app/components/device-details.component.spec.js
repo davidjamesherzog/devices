@@ -18,7 +18,7 @@ describe('Device Detail Controller', function () {
 
   beforeEach(function () {
     bard.appModule('devices');
-    bard.inject('$controller', '$q', '$rootScope', '$stateParams', 'toastr', 'DeviceService');
+    bard.inject('$controller', '$q', '$rootScope', 'toastr', 'DeviceService');
   });
 
   describe('find', function () {
@@ -30,22 +30,20 @@ describe('Device Detail Controller', function () {
       beforeEach(function () {
 
         spyOn(DeviceService, 'find').and.returnValue($q.resolve(api.devices.find.success));
-        $stateParams.id = id;
 
-        controller = $controller('DeviceDetailController', {
-          $stateParams: $stateParams,
+        controller = $controller('DeviceDetailsController', {
           DeviceService: DeviceService
         });
 
       });
 
-      it('controller should exist', function () {
-        expect(controller).toBeDefined;
+      it('should exist', function () {
+        expect(controller).toBeDefined();
       });
 
       it('should return device', function () {
 
-        controller.find($stateParams.id);
+        controller.find(id);
 
         $rootScope.$apply();
 
@@ -71,24 +69,22 @@ describe('Device Detail Controller', function () {
       beforeEach(function () {
 
         spyOn(DeviceService, 'find').and.returnValue($q.reject(error));
-        $stateParams.id = id;
 
-        controller = $controller('DeviceDetailController', {
-          $stateParams: $stateParams,
+        controller = $controller('DeviceDetailsController', {
           DeviceService: DeviceService
         });
 
       });
 
-      it('controller should exist', function () {
-        expect(controller).toBeDefined;
+      it('should exist', function () {
+        expect(controller).toBeDefined();
       });
 
       it('should fail returning device', function () {
 
         spyOn(toastr, 'error');
 
-        controller.find($stateParams.id);
+        controller.find(id);
 
         $rootScope.$digest();
 
@@ -98,6 +94,34 @@ describe('Device Detail Controller', function () {
 
     });
 
+
+  });
+
+  describe('$routerOnActivate', function () {
+
+    beforeEach(function () {
+
+      controller = $controller('DeviceDetailsController', {
+        DeviceService: DeviceService
+      });
+
+      spyOn(controller, 'find');
+
+    });
+
+    it('should call find', function() {
+
+      var next = {
+        params: {
+          id: 1
+        }
+      };
+
+      controller.$routerOnActivate(next, null);
+
+      expect(controller.find).toHaveBeenCalledWith(next.params.id);
+
+    });
 
   });
 

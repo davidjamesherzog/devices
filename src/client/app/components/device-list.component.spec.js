@@ -1,5 +1,5 @@
 /* jshint -W117, -W030 */
-describe('Device Controller', function () {
+describe('Device List Component', function () {
   var controller;
   var devices;
 
@@ -38,7 +38,7 @@ describe('Device Controller', function () {
       beforeEach(function () {
         spyOn(DeviceService, 'list').and.returnValue($q.resolve(devices));
 
-        controller = $controller('DeviceController');
+        controller = $controller('DeviceListController');
       });
 
       it('should exist', function () {
@@ -69,7 +69,7 @@ describe('Device Controller', function () {
       beforeEach(function () {
         spyOn(DeviceService, 'list').and.returnValue($q.reject(error));
 
-        controller = $controller('DeviceController');
+        controller = $controller('DeviceListController');
       });
 
       it('should not retrieve', function () {
@@ -89,7 +89,7 @@ describe('Device Controller', function () {
     beforeEach(function () {
       spyOn(DeviceService, 'list').and.returnValue($q.resolve(devices));
 
-      controller = $controller('DeviceController');
+      controller = $controller('DeviceListController');
     });
 
     it('should create new device', function () {
@@ -128,7 +128,7 @@ describe('Device Controller', function () {
     beforeEach(function () {
       spyOn(DeviceService, 'list').and.returnValue($q.resolve(devices));
 
-      controller = $controller('DeviceController');
+      controller = $controller('DeviceListController');
     });
 
     it('should purge device', function () {
