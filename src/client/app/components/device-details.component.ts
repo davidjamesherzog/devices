@@ -34,13 +34,11 @@ module devices {
 
   class DeviceDetailsComponent implements ng.IComponentOptions {
 
-    public bindings: any;
     public controller: any;
     public controllerAs: string;
     public templateUrl: string;
 
     constructor() {
-      this.bindings = {};
       this.templateUrl = 'app/components/device-details.component.html';
       this.controller = DeviceDetailsController;
       this.controllerAs = 'vm'
