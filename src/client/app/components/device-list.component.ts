@@ -1,7 +1,7 @@
-namespace devices {
+module devices {
   'use strict';
 
-  export class DeviceController implements IDeviceController {
+  export class DeviceListController implements IDeviceListController {
 
     static $inject: Array<string> = ['toastr', 'DeviceService'];
     constructor(private toastr: Toastr,
@@ -63,7 +63,26 @@ namespace devices {
 
   }
 
+  class DeviceListComponent implements ng.IComponentOptions {
+
+    public bindings: any;
+    public controller: any;
+    public controllerAs: string;
+    public templateUrl: string;
+
+    constructor() {
+      this.bindings = {
+        '$router': '<'
+      };
+      this.templateUrl = 'app/components/device-list.component.html';
+      this.controller = DeviceListController;
+      this.controllerAs = 'vm'
+    }
+
+  }
+
   angular
-    .module('devices')
-    .controller('DeviceController', DeviceController);
+    .module("devices")
+    .component("deviceList", new DeviceListComponent())
+    .controller('DeviceListController', DeviceListController);
 }

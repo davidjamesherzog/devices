@@ -1,9 +1,10 @@
-namespace devices {
+module devices {
   'use strict';
 
-  angular.module('devices', [
-    'ui.router',
-    'ngResource',
-    'toastr'
-  ]);
+  angular
+    .module('devices', [
+      'ngComponentRouter',
+      'ngResource',
+      'toastr'
+    ]);
 }

@@ -8,8 +8,6 @@
 
     <!-- build:css styles/lib.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css" />
-    <link rel="stylesheet" href="/bower_components/angular-material-icons/angular-material-icons.css" />
     <link rel="stylesheet" href="/bower_components/angular-toastr/dist/angular-toastr.css" />
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
@@ -23,31 +21,23 @@
     <!-- endinject -->
     <!-- endbuild -->
 </head>
-<body>
+<body ng-cloak>
 
-  <div class="container">
-
-      <ui-view />
-
-  </div>
+  <device-app></device-app>
 
   <!-- build:js js/lib.js -->
   <!-- bower:js -->
   <script src="/bower_components/jquery/dist/jquery.js"></script>
   <script src="/bower_components/angular/angular.js"></script>
-  <script src="/bower_components/angular-animate/angular-animate.js"></script>
-  <script src="/bower_components/angular-aria/angular-aria.js"></script>
-  <script src="/bower_components/angular-messages/angular-messages.js"></script>
-  <script src="/bower_components/angular-material/angular-material.js"></script>
-  <script src="/bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+  <script src="/bower_components/angular-component-router/angular_1_router.js"></script>
+  <script src="/bower_components/angular-component-router/ng_route_shim.js"></script>
   <script src="/bower_components/angular-resource/angular-resource.js"></script>
   <script src="/bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
   <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
   <script src="/bower_components/moment/moment.js"></script>
-  <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="/bower_components/toastr/toastr.js"></script>
+  <script src="/bower_components/angular-animate/angular-animate.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -56,8 +46,11 @@
   <!-- inject:js -->
   <script src="/src/client/app/app.module.js"></script>
   <script src="/src/client/app/app.config.js"></script>
-  <script src="/src/client/app/controllers/device.controller.js"></script>
-  <script src="/src/client/app/controllers/device.detail.controller.js"></script>
+  <script src="/src/client/app/components/device-app.component.js"></script>
+  <script src="/src/client/app/components/device-details.component.js"></script>
+  <script src="/src/client/app/components/device-list.component.js"></script>
+  <script src="/src/client/app/interfaces/idevice-detail.controller.js"></script>
+  <script src="/src/client/app/interfaces/idevice-list.controller.js"></script>
   <script src="/src/client/app/models/device.model.js"></script>
   <script src="/src/client/app/services/device.service.js"></script>
   <!-- endinject -->

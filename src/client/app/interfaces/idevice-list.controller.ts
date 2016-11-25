@@ -1,4 +1,4 @@
-interface IDeviceController {
+interface IDeviceListController {
   devices: Array<any>;
   list: () => void,
   create: (device: devices.IDevice) => void,
